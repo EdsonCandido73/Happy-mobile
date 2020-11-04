@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import mapMarker from '../images/map-marker.png';
@@ -19,11 +19,11 @@ export default function OrphanagesMap() {
   const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
   const navigation = useNavigation();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     api.get('orphanages').then(response => {
       setOrphanages(response.data);
     });
-  }, []);
+  });
 
   function handleNavigateOrphanageDetails(id: number) {
     navigation.navigate('OrphanageDetails', { id });
@@ -39,8 +39,8 @@ export default function OrphanagesMap() {
           provider={PROVIDER_GOOGLE}
           style={styles.map}
           initialRegion={{
-            latitude: -27.2092052,
-            longitude: -49.6401892,
+            latitude: -27.001655950080337,
+            longitude: -48.65968609687895,
             latitudeDelta: 0.008,
             longitudeDelta: 0.008,
           }}
